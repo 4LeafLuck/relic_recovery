@@ -18,35 +18,35 @@ import android.view.View;
 
 @Autonomous(name="ColorSensorTest", group="Autonomous")
 
-public class ColorSensorTest extends OpMode {
+public class ColorSensorTest extends LinearOpMode {
     ColorSensor testSense;
     @Override
-    public void loop{
-        if(DEBUG){
-            telemetry.addData("Text:", "isColor Data(4): " + isColor(colorSensor));
-            //telemetry.addData("Text:", "RGB Colors: " + colorSensor.red() + ", " + colorSensor.green() + ", " + colorSensor.blue());
-            telemetry.addData("Colors (R, B, G)", hsvValues[0]);
-        }
+    public void loop(){
+       // if(DEBUG){
+         //telemetry.addData("Text:", "isColor Data(4): " + isColor(colorSensor));
+           // telemetry.addData("Text:", "RGB Colors: " + colorSensor.red() + ", " + colorSensor.green() + ", " + colorSensor.blue());
+           // telemetry.addData("Colors (R, B, G)", hsvValues[0]);
+        //}
     }
 
     @Override
-    public void runOpMode{
+    public void runOpMode(){
         // hsvValues is an array that will hold the hue, saturation, and value information.
         float hsvValues[] = {0F,0F,0F};
 
         // values is a reference to the hsvValues array.
-        final float values[] = hsvValues;
+        //final float values[] = hsvValues;
 
         // get a reference to the RelativeLayout so we can change the background
         // color of the Robot Controller app to match the hue detected by the RGB sensor.
         final View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(com.qualcomm.ftcrobotcontroller.R.id.RelativeLayout);
 
-        colorSensor.enableLed(false);
-
-        waitForStart();
+        colorSensor.enableLed(true);
+        
+        //waitForStart();
 
         Color.RGBToHSV(colorSensor.red() * 8, colorSensor.green() * 8, colorSensor.blue() * 8, hsvValues);
-
+        sense();
         telemetry.update();
 
     }
