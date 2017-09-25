@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DcMotorController;
@@ -18,16 +18,16 @@ import android.view.View;
 
 @Autonomous(name="ColorSensorTest", group="Autonomous")
 
-public class ColorSensorTest extends LinearOpMode {
+public class JustColorSensor extends LinearOpMode {
     ColorSensor testSense;
-    @Override
-    public void loop(){
+    //@Override
+    //public void loop(){
        // if(DEBUG){
          //telemetry.addData("Text:", "isColor Data(4): " + isColor(colorSensor));
            // telemetry.addData("Text:", "RGB Colors: " + colorSensor.red() + ", " + colorSensor.green() + ", " + colorSensor.blue());
            // telemetry.addData("Colors (R, B, G)", hsvValues[0]);
         //}
-    }
+   // }
 
     @Override
     public void runOpMode(){
@@ -41,11 +41,11 @@ public class ColorSensorTest extends LinearOpMode {
         // color of the Robot Controller app to match the hue detected by the RGB sensor.
         final View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(com.qualcomm.ftcrobotcontroller.R.id.RelativeLayout);
 
-        colorSensor.enableLed(true);
+        testSense.enableLed(true);
         
         //waitForStart();
 
-        Color.RGBToHSV(colorSensor.red() * 8, colorSensor.green() * 8, colorSensor.blue() * 8, hsvValues);
+        Color.RGBToHSV(testSense.red() * 8, testSense.green() * 8, testSense.blue() * 8, hsvValues);
         sense();
         telemetry.update();
 
@@ -69,19 +69,19 @@ public class ColorSensorTest extends LinearOpMode {
        boolean bLedOn = true;
 
        // turn the LED on in the beginning, just so user will know that the sensor is active.
-       colorSensor.enableLed(bLedOn);
+       testSense.enableLed(bLedOn);
 
-       colorSensor = hardwareMap.colorSensor.get("sensor_color");
+       testSense = hardwareMap.colorSensor.get("sensor_color");
 
        // convert the RGB values to HSV values.
-       Color.RGBToHSV(colorSensor.red(), colorSensor.green(), colorSensor.blue(), hsvValues);
+       Color.RGBToHSV(testSense.red(), testSense.green(), testSense.blue(), hsvValues);
 
        // send the info back to driver station using telemetry function.
        telemetry.addData("LED", bLedOn ? "On" : "Off");
-       telemetry.addData("Clear", colorSensor.alpha());
-       telemetry.addData("Red ", colorSensor.red());
-       telemetry.addData("Green", colorSensor.green());
-       telemetry.addData("Blue ", colorSensor.blue());
+       telemetry.addData("Clear", testSense.alpha());
+       telemetry.addData("Red ", testSense.red());
+       telemetry.addData("Green", testSense.green());
+       telemetry.addData("Blue ", testSense.blue());
        telemetry.addData("Hue", hsvValues[0]);
       // telemetry.addData("Is Red: ", (colorSensor.red()>200) && (colorSensor.blue()<100));
       // telemetry.addData("Is Blue: ", (colorSensor.blue()>200) && (colorSensor.red()<100));
